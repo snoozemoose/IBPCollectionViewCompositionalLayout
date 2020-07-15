@@ -337,8 +337,29 @@
                     itemFrame.origin.y += sectionOrigin.y;
                     layoutAttributes.frame = itemFrame;
 
+                    //DEVELOP https://github.com/kishikawakatsumi/IBPCollectionViewCompositionalLayout/pull/122
+                    if (boundaryItem.extendsBoundary && extendedBoundary.height > CGRectGetHeight(itemFrame)) {
+                        itemFrame.origin.y += extendedBoundary.height + boundaryItem.offset.y - CGRectGetHeight(itemFrame);
+                        layoutAttributes.frame = itemFrame;
+                    }
+                    //DEVELOP
+
                     if (boundaryItem.extendsBoundary && extendedBoundary.height < CGRectGetHeight(itemFrame)) {
-                        CGFloat extendHeight = CGRectGetHeight(itemFrame) - extendedBoundary.height;
+                        //DEVELOP https://github.com/kishikawakatsumi/IBPCollectionViewCompositionalLayout/pull/122
+                        CGFloat extendHeight;
+
+                        extendHeight = CGRectGetHeight(itemFrame) - extendedBoundary.height - boundaryItem.offset.y;
+                        if(extendHeight < 0) {
+                            extendHeight = 0;
+                        }
+
+                        CGRect newFrame = itemFrame;
+                        newFrame.origin.y = sectionOrigin.y + boundaryItem.offset.y - CGRectGetHeight(itemFrame);
+                        if(newFrame.origin.y < sectionOrigin.y) {
+                            newFrame.origin.y = sectionOrigin.y;
+                        }
+                        layoutAttributes.frame = newFrame;
+                        //DEVELOP
                         for (UICollectionViewLayoutAttributes *attributes in cachedItemAttributes.allValues) {
                             if (attributes.representedElementCategory == UICollectionElementCategoryCell ||
                                 attributes.representedElementCategory == UICollectionElementCategoryDecorationView) {
