@@ -337,6 +337,13 @@
                     itemFrame.origin.y += sectionOrigin.y;
                     layoutAttributes.frame = itemFrame;
 
+                    //DEVELOP https://github.com/kishikawakatsumi/IBPCollectionViewCompositionalLayout/pull/122
+                    if (boundaryItem.extendsBoundary && extendedBoundary.height > CGRectGetHeight(itemFrame)) {
+                        itemFrame.origin.y += extendedBoundary.height + boundaryItem.offset.y - CGRectGetHeight(itemFrame);
+                        layoutAttributes.frame = itemFrame;
+                    }
+                    //DEVELOP
+
                     if (boundaryItem.extendsBoundary && extendedBoundary.height < CGRectGetHeight(itemFrame)) {
                         CGFloat extendHeight;
                         
