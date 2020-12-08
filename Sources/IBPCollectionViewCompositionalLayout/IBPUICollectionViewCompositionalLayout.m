@@ -47,7 +47,7 @@
 @implementation IBPUICollectionViewCompositionalLayout
 
 - (instancetype)initWithSection:(IBPNSCollectionLayoutSection *)section {
-    if (@available(iOS 13, *)) {
+    if (@available(iOS 13, tvOS 13, *)) {
         return [[NSClassFromString(@"UICollectionViewCompositionalLayout") alloc] initWithSection:section];
     } else {
         IBPUICollectionViewCompositionalLayoutConfiguration *configuration = [IBPUICollectionViewCompositionalLayoutConfiguration defaultConfiguration];
@@ -57,7 +57,7 @@
 
 - (instancetype)initWithSection:(IBPNSCollectionLayoutSection *)section
                   configuration:(IBPUICollectionViewCompositionalLayoutConfiguration *)configuration {
-    if (@available(iOS 13, *)) {
+    if (@available(iOS 13, tvOS 13, *)) {
         return [[NSClassFromString(@"UICollectionViewCompositionalLayout") alloc] initWithSection:section configuration:configuration];
     } else {
         return [self initWithSection:section sectionProvider:nil configuration:configuration];
@@ -65,7 +65,7 @@
 }
 
 - (instancetype)initWithSectionProvider:(IBPUICollectionViewCompositionalLayoutSectionProvider)sectionProvider {
-    if (@available(iOS 13, *)) {
+    if (@available(iOS 13, tvOS 13, *)) {
         return [[NSClassFromString(@"UICollectionViewCompositionalLayout") alloc] initWithSectionProvider:sectionProvider];
     } else {
         IBPUICollectionViewCompositionalLayoutConfiguration *configuration = [IBPUICollectionViewCompositionalLayoutConfiguration defaultConfiguration];
@@ -75,7 +75,7 @@
 
 - (instancetype)initWithSectionProvider:(IBPUICollectionViewCompositionalLayoutSectionProvider)sectionProvider
                           configuration:(IBPUICollectionViewCompositionalLayoutConfiguration *)configuration {
-    if (@available(iOS 13, *)) {
+    if (@available(iOS 13, tvOS 13, *)) {
         return [[NSClassFromString(@"UICollectionViewCompositionalLayout") alloc] initWithSectionProvider:sectionProvider configuration:configuration];
     } else {
         return [self initWithSection:nil sectionProvider:sectionProvider configuration:configuration];
