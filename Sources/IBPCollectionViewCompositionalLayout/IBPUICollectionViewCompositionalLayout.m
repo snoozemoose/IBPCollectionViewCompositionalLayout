@@ -580,26 +580,33 @@
     scrollView.showsVerticalScrollIndicator = NO;
 	scrollView.clipsToBounds = NO;
     
-#if !TARGET_OS_TV
+
     switch (section.orthogonalScrollingBehavior) {
         case IBPUICollectionLayoutSectionOrthogonalScrollingBehaviorNone:
         case IBPUICollectionLayoutSectionOrthogonalScrollingBehaviorContinuous:
         case IBPUICollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary:
+#if !TARGET_OS_TV
             scrollView.pagingEnabled = NO;
+#endif
             break;
         case IBPUICollectionLayoutSectionOrthogonalScrollingBehaviorPaging:
+#if !TARGET_OS_TV
             scrollView.pagingEnabled = YES;
+#endif
             break;
         case IBPUICollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging:
+#if !TARGET_OS_TV
             scrollView.pagingEnabled = NO;
+#endif
             scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
             break;
         case IBPUICollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered:
+#if !TARGET_OS_TV
             scrollView.pagingEnabled = NO;
+#endif
             scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
             break;
     }
-#endif
 
     return scrollView;
 }
